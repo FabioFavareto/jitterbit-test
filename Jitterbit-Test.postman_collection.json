@@ -1,0 +1,222 @@
+{
+  "info": {
+    "_postman_id": "0e20220f-ca78-4aa6-a85d-a2b94e9bb9f0",
+    "name": "Jitterbit-Test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "36523170"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const response = pm.response.json();\r",
+              "pm.environment.set(\"token\", response.token);\r",
+              "console.log(\"Token salvo:\", response.token);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/auth/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Criar Pedido",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"numeroPedido\": \"v10089015vdb-01\",\r\n    \"valorTotal\": 10000,\r\n    \"dataCriacao\": \"2023-07-19T12:24:11.5299601+00:00\",\r\n    \"items\": [\r\n        {\r\n            \"idItem\": \"2434\",\r\n            \"quantidadeItem\": 1,\r\n            \"valorItem\": 1000\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/order",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "order"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar Pedido",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/order/v10089015vdb-01",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "order",
+            "v10089015vdb-01"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Atualizar pedido",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"numeroPedido\": \"v10089015vdb-01\",\r\n    \"valorTotal\": 15000,\r\n    \"dataCriacao\": \"2023-07-19T12:24:11.5299601+00:00\",\r\n    \"items\": [\r\n        {\r\n            \"idItem\": \"2434\",\r\n            \"quantidadeItem\": 2,\r\n            \"valorItem\": 750\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/order/v10089015vdb-01",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "order",
+            "v10089015vdb-01"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Listar Todos",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/order/list",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "order",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Deletar Pedido",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{base_url}}/order/v10089015vdb-01",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "order",
+            "v10089015vdb-01"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
